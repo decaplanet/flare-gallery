@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
 
 import gallerySetting from "../gallerySetting.json";
 import {
@@ -27,20 +26,22 @@ const readGallery = () => {
 	const endIndex = +gallerySetting.endIndex;
 
 	for (let i = startIndex; i <= endIndex; i++) {
+		const usingIndex = i < 10 ? `0${i}` : i;
+
 		try {
-			const pngOne = require(`../gallery/${i}.png`);
+			const pngOne = require(`../gallery/${usingIndex}.png`);
 			if (pngOne) fileList.push(pngOne);
 		} catch (error) {
 			try {
-				const jpgOne = require(`../gallery/${i}.jpg`);
+				const jpgOne = require(`../gallery/${usingIndex}.jpg`);
 				if (jpgOne) fileList.push(jpgOne);
 			} catch (error) {
 				try {
-					const gifOne = require(`../gallery/${i}.gif`);
+					const gifOne = require(`../gallery/${usingIndex}.gif`);
 					if (gifOne) fileList.push(gifOne);
 				} catch (error) {
 					try {
-						const mp4One = require(`../gallery/${i}.mp4`);
+						const mp4One = require(`../gallery/${usingIndex}.mp4`);
 						if (mp4One) fileList.push(mp4One);
 					} catch (error) {
 						console.log("Failed to load images!");
@@ -65,6 +66,7 @@ function GalleryContainer() {
 			<GalleryGrid>
 				{isRandomizeDone
 					? fileList.map((one, index) => {
+							console.log(one);
 							const dotDivided = one.split(".");
 							switch (dotDivided[dotDivided.length - 1]) {
 								case "png":
