@@ -66,7 +66,6 @@ function GalleryContainer() {
 			<GalleryGrid>
 				{isRandomizeDone
 					? fileList.map((one, index) => {
-							console.log(one);
 							const dotDivided = one.split(".");
 							switch (dotDivided[dotDivided.length - 1]) {
 								case "png":
